@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pharm_live/modules/splash_page.dart';
+import 'package:pharm_live/core/router/app_routes.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -10,13 +10,15 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Platform.isIOS
-        ? const CupertinoApp(
+        ? CupertinoApp(
             debugShowCheckedModeBanner: false,
-            home: SplashPage(),
+            onGenerateRoute: RouteList.router.onGenerate,
+            initialRoute: '/',
           )
-        : const MaterialApp(
+        : MaterialApp(
             debugShowCheckedModeBanner: false,
-            home: SplashPage(),
+            onGenerateRoute: RouteList.router.onGenerate,
+            initialRoute: '/',
           );
   }
 }
