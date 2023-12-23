@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:pharm_live/modules/bottom_navbar/presentation/bottom_nav_bar.dart';
-import 'package:pharm_live/modules/splash_page.dart';
+
+import 'package:pharm_live/modules/global/helpers/imports/app_imports.dart';
+
 
 class RouteList {
   static final RouteList _generate = RouteList._init();
@@ -11,7 +11,9 @@ class RouteList {
   Route? onGenerate(RouteSettings settings) {
     switch (settings.name) {
       case '/':
-        return _navigate(const SplashPage());
+        return _navigate(const RegisterPage() // SplashPage()
+
+            );
       case "bottomNavbar":
         return _navigate(const BottomNavBarPage());
       // case "sign_up":
