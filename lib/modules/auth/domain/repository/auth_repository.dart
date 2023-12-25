@@ -1,6 +1,6 @@
+import 'package:pharm_live/core/utils/typedef.dart';
 import 'package:pharm_live/modules/global/helpers/imports/app_imports.dart';
 
 abstract class AuthRepository {
-  Future<Either<Failure, RegisterEntity>> register(
-      String phone);
+  ResultFuture<void> register(String phone);
 }
