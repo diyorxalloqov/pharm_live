@@ -1,8 +1,8 @@
-
 import 'package:pharm_live/modules/global/helpers/imports/app_imports.dart';
 
 class AppIconName extends StatelessWidget {
-  const AppIconName({super.key});
+  final Color color;
+  const AppIconName({super.key, required this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -10,10 +10,10 @@ class AppIconName extends StatelessWidget {
       children: [
         SvgPicture.asset(AppIcons.appIcon, width: 30),
         const SpaceWidth(),
-        const Text(
+        Text(
           "Pharm Live",
           style: TextStyle(
-              color: Colors.black, fontSize: 25, fontWeight: FontWeight.bold),
+              color: color, fontSize: 25, fontWeight: FontWeight.bold),
         )
       ],
     );

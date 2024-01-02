@@ -26,7 +26,7 @@ class _SplashPageState extends State<SplashPage> {
       body: Container(
         decoration: const BoxDecoration(
             image: DecorationImage(
-                image: AssetImage(AppImages.splash), fit: BoxFit.cover)),
+                image: AssetImage(AppImages.scaffoldback), fit: BoxFit.cover)),
         child: Center(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,

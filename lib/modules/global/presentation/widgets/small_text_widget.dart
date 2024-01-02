@@ -9,9 +9,11 @@ class SmallText extends StatelessWidget {
     return Text(
       text,
       style: const TextStyle(
-        fontSize: 16,
-        fontWeight: FontWeight.w400,
-      ),
+          fontSize: 16,
+          fontWeight: FontWeight.w400,
+          overflow: TextOverflow.ellipsis),
+      maxLines: 2,
+      overflow: TextOverflow.ellipsis,
     );
   }
 }
