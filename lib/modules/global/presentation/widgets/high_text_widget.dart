@@ -9,10 +9,10 @@ class HighText extends StatelessWidget {
     return Text(
       text,
       style: const TextStyle(
-        color: Colors.black,
-        fontSize: 28,
-        fontWeight: FontWeight.w600,
-      ),
+          color: Colors.black,
+          fontSize: 28,
+          fontWeight: FontWeight.w600,
+          overflow: TextOverflow.ellipsis),
     );
   }
 }

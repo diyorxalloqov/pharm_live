@@ -4,8 +4,7 @@ class DioSettings {
   final BaseOptions _dioBaseOptions = BaseOptions(
     baseUrl: AppUrls.baseUrl,
     connectTimeout: const Duration(seconds: 35),
-    receiveTimeout: const Duration(seconds: 33),
-    followRedirects: false,
+    receiveTimeout: const Duration(seconds: 35),
     contentType: 'Application/json',
     validateStatus: (status) => status != null && status <= 500,
   );
