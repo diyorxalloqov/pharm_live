@@ -12,11 +12,10 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
 
   RegisterBloc(this.register, this.checkSms) : super(const RegisterState()) {
     on<_Register>((event, emit) async {
-      emit(state.copyWith(status: ActionStatus.isLoading));
+      // emit(state.copyWith(status: ActionStatus.isLoading));
       Either<Failure, dynamic> result = await register(event.phone);
       result.fold((l) => emit(state.copyWith(status: ActionStatus.isError)),
           (r) {
-        event.onSucces();
         emit(state.copyWith(status: ActionStatus.isSuccess));
       });
     });

@@ -14,10 +14,22 @@ class RouteList {
         return _navigate(const RegisterPage());
       case "otp":
         final args = settings.arguments as OtpPageArguments;
-        return _navigate(
-            OtpPage(phone: args.phone, registerBloc: args.registerBloc));
+        return _navigate(BlocProvider(
+          create: (context) => RegisterBloc(RegisterUseCase(),SmsUseCase()),
+          child: OtpPage(phone: args.phone, registerBloc: args.registerBloc),
+        ));
       case "bottomNavbar":
         return _navigate(const BottomNavBarPage());
+      case "CompanyInfo":
+        return _navigate(const CompanyInfo());
+      case "paidPage":
+        return _navigate(const PaidPage());
+      case "location":
+        return _navigate(const LocationPage());
+      case "delivery":
+        return _navigate(const DeliveryPage());
+      case "orderHistory":
+        return _navigate(const OrderHistory());
     }
     return null;
   }

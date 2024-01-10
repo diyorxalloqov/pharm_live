@@ -21,7 +21,7 @@ class ProfileItemWidget extends StatelessWidget {
           alignment: Alignment.center,
           child: ListTile(
             leading: Container(
-              height: context.height * 0.07,
+              height: context.height * 0.065,
               width: context.width * 0.13,
               decoration: BoxDecoration(
                 color: const Color(0x1940B75B),

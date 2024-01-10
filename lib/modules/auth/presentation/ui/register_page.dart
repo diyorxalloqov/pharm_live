@@ -9,13 +9,13 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   late TextEditingController _phoneController;
-  late RegisterBloc _registerBloc;
+  late RegisterBloc registerBloc;
   late GlobalKey<FormState> _key;
 
   @override
   void initState() {
     _phoneController = TextEditingController();
-    _registerBloc = RegisterBloc(RegisterUseCase(), SmsUseCase());
+    registerBloc = RegisterBloc(RegisterUseCase(), SmsUseCase());
     _key = GlobalKey<FormState>();
     super.initState();
   }
@@ -23,7 +23,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
-      value: _registerBloc,
+      value: registerBloc,
       child: Scaffold(
         body: Column(
           children: [
@@ -117,13 +117,12 @@ class _RegisterPageState extends State<RegisterPage> {
           child: ElevatedButton(
               onPressed: () {
                 if (_key.currentState!.validate()) {
-                  _registerBloc.add(RegisterEvent.register(
-                      onSucces: () {},
+                  registerBloc.add(RegisterEvent.register(
                       phone: _phoneController.text.replaceAll(' ', '')));
                   Navigator.pushNamed(context, 'otp',
                       arguments: OtpPageArguments(
                           phone: _phoneController.text.replaceAll(' ', ''),
-                          registerBloc: _registerBloc));
+                          registerBloc: registerBloc));
                   print(_phoneController.text.replaceAll(' ', ''));
                 }
               },
@@ -131,7 +130,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   backgroundColor: primaryColor,
                   fixedSize: Size(double.infinity, 55.h)),
               child: Center(
-                  child: _registerBloc.state.status == ActionStatus.isLoading
+                  child: registerBloc.state.status == ActionStatus.isLoading
                       ? const CircularProgressIndicator.adaptive()
                       : Text(
                           'Отправить',

@@ -16,26 +16,23 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$RegisterEvent {
-  void Function() get onSucces => throw _privateConstructorUsedError;
   String get phone => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(VoidCallback onSucces, String phone) register,
-    required TResult Function(VoidCallback onSucces, String phone, String sms)
-        checkSms,
+    required TResult Function(String phone) register,
+    required TResult Function(String phone, String sms) checkSms,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(VoidCallback onSucces, String phone)? register,
-    TResult? Function(VoidCallback onSucces, String phone, String sms)?
-        checkSms,
+    TResult? Function(String phone)? register,
+    TResult? Function(String phone, String sms)? checkSms,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(VoidCallback onSucces, String phone)? register,
-    TResult Function(VoidCallback onSucces, String phone, String sms)? checkSms,
+    TResult Function(String phone)? register,
+    TResult Function(String phone, String sms)? checkSms,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -70,7 +67,7 @@ abstract class $RegisterEventCopyWith<$Res> {
           RegisterEvent value, $Res Function(RegisterEvent) then) =
       _$RegisterEventCopyWithImpl<$Res, RegisterEvent>;
   @useResult
-  $Res call({void Function() onSucces, String phone});
+  $Res call({String phone});
 }
 
 /// @nodoc
@@ -86,14 +83,9 @@ class _$RegisterEventCopyWithImpl<$Res, $Val extends RegisterEvent>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? onSucces = null,
     Object? phone = null,
   }) {
     return _then(_value.copyWith(
-      onSucces: null == onSucces
-          ? _value.onSucces
-          : onSucces // ignore: cast_nullable_to_non_nullable
-              as void Function(),
       phone: null == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
@@ -110,7 +102,7 @@ abstract class _$$RegisterImplCopyWith<$Res>
       __$$RegisterImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({VoidCallback onSucces, String phone});
+  $Res call({String phone});
 }
 
 /// @nodoc
@@ -124,14 +116,9 @@ class __$$RegisterImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? onSucces = null,
     Object? phone = null,
   }) {
     return _then(_$RegisterImpl(
-      onSucces: null == onSucces
-          ? _value.onSucces
-          : onSucces // ignore: cast_nullable_to_non_nullable
-              as VoidCallback,
       phone: null == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
@@ -143,16 +130,14 @@ class __$$RegisterImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$RegisterImpl implements _Register {
-  const _$RegisterImpl({required this.onSucces, required this.phone});
+  const _$RegisterImpl({required this.phone});
 
-  @override
-  final VoidCallback onSucces;
   @override
   final String phone;
 
   @override
   String toString() {
-    return 'RegisterEvent.register(onSucces: $onSucces, phone: $phone)';
+    return 'RegisterEvent.register(phone: $phone)';
   }
 
   @override
@@ -160,13 +145,11 @@ class _$RegisterImpl implements _Register {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$RegisterImpl &&
-            (identical(other.onSucces, onSucces) ||
-                other.onSucces == onSucces) &&
             (identical(other.phone, phone) || other.phone == phone));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, onSucces, phone);
+  int get hashCode => Object.hash(runtimeType, phone);
 
   @JsonKey(ignore: true)
   @override
@@ -177,32 +160,30 @@ class _$RegisterImpl implements _Register {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(VoidCallback onSucces, String phone) register,
-    required TResult Function(VoidCallback onSucces, String phone, String sms)
-        checkSms,
+    required TResult Function(String phone) register,
+    required TResult Function(String phone, String sms) checkSms,
   }) {
-    return register(onSucces, phone);
+    return register(phone);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(VoidCallback onSucces, String phone)? register,
-    TResult? Function(VoidCallback onSucces, String phone, String sms)?
-        checkSms,
+    TResult? Function(String phone)? register,
+    TResult? Function(String phone, String sms)? checkSms,
   }) {
-    return register?.call(onSucces, phone);
+    return register?.call(phone);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(VoidCallback onSucces, String phone)? register,
-    TResult Function(VoidCallback onSucces, String phone, String sms)? checkSms,
+    TResult Function(String phone)? register,
+    TResult Function(String phone, String sms)? checkSms,
     required TResult orElse(),
   }) {
     if (register != null) {
-      return register(onSucces, phone);
+      return register(phone);
     }
     return orElse();
   }
@@ -240,12 +221,8 @@ class _$RegisterImpl implements _Register {
 }
 
 abstract class _Register implements RegisterEvent {
-  const factory _Register(
-      {required final VoidCallback onSucces,
-      required final String phone}) = _$RegisterImpl;
+  const factory _Register({required final String phone}) = _$RegisterImpl;
 
-  @override
-  VoidCallback get onSucces;
   @override
   String get phone;
   @override
@@ -262,7 +239,7 @@ abstract class _$$CheckSmsImplCopyWith<$Res>
       __$$CheckSmsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({VoidCallback onSucces, String phone, String sms});
+  $Res call({String phone, String sms});
 }
 
 /// @nodoc
@@ -276,15 +253,10 @@ class __$$CheckSmsImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? onSucces = null,
     Object? phone = null,
     Object? sms = null,
   }) {
     return _then(_$CheckSmsImpl(
-      onSucces: null == onSucces
-          ? _value.onSucces
-          : onSucces // ignore: cast_nullable_to_non_nullable
-              as VoidCallback,
       phone: null == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
@@ -300,11 +272,8 @@ class __$$CheckSmsImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$CheckSmsImpl implements _CheckSms {
-  const _$CheckSmsImpl(
-      {required this.onSucces, required this.phone, required this.sms});
+  const _$CheckSmsImpl({required this.phone, required this.sms});
 
-  @override
-  final VoidCallback onSucces;
   @override
   final String phone;
   @override
@@ -312,7 +281,7 @@ class _$CheckSmsImpl implements _CheckSms {
 
   @override
   String toString() {
-    return 'RegisterEvent.checkSms(onSucces: $onSucces, phone: $phone, sms: $sms)';
+    return 'RegisterEvent.checkSms(phone: $phone, sms: $sms)';
   }
 
   @override
@@ -320,14 +289,12 @@ class _$CheckSmsImpl implements _CheckSms {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CheckSmsImpl &&
-            (identical(other.onSucces, onSucces) ||
-                other.onSucces == onSucces) &&
             (identical(other.phone, phone) || other.phone == phone) &&
             (identical(other.sms, sms) || other.sms == sms));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, onSucces, phone, sms);
+  int get hashCode => Object.hash(runtimeType, phone, sms);
 
   @JsonKey(ignore: true)
   @override
@@ -338,32 +305,30 @@ class _$CheckSmsImpl implements _CheckSms {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(VoidCallback onSucces, String phone) register,
-    required TResult Function(VoidCallback onSucces, String phone, String sms)
-        checkSms,
+    required TResult Function(String phone) register,
+    required TResult Function(String phone, String sms) checkSms,
   }) {
-    return checkSms(onSucces, phone, sms);
+    return checkSms(phone, sms);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(VoidCallback onSucces, String phone)? register,
-    TResult? Function(VoidCallback onSucces, String phone, String sms)?
-        checkSms,
+    TResult? Function(String phone)? register,
+    TResult? Function(String phone, String sms)? checkSms,
   }) {
-    return checkSms?.call(onSucces, phone, sms);
+    return checkSms?.call(phone, sms);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(VoidCallback onSucces, String phone)? register,
-    TResult Function(VoidCallback onSucces, String phone, String sms)? checkSms,
+    TResult Function(String phone)? register,
+    TResult Function(String phone, String sms)? checkSms,
     required TResult orElse(),
   }) {
     if (checkSms != null) {
-      return checkSms(onSucces, phone, sms);
+      return checkSms(phone, sms);
     }
     return orElse();
   }
@@ -402,12 +367,9 @@ class _$CheckSmsImpl implements _CheckSms {
 
 abstract class _CheckSms implements RegisterEvent {
   const factory _CheckSms(
-      {required final VoidCallback onSucces,
-      required final String phone,
+      {required final String phone,
       required final String sms}) = _$CheckSmsImpl;
 
-  @override
-  VoidCallback get onSucces;
   @override
   String get phone;
   String get sms;

@@ -4,8 +4,11 @@ void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   await setupLocator();
-  // RegisterService().chechSms(phone: '+998933974325', sms: '67020');
-  //  context.setLocale(const Locale("ru"));
+  print(await FlutterSecureStorage().read(key: Keys.access) ??
+      "access token yoq");
+  print(await FlutterSecureStorage().read(key: Keys.refresh) ??
+      "refresh token yoq");
+
   runApp(EasyLocalization(
     saveLocale: true,
     startLocale: const Locale("ru"),

@@ -5,6 +5,11 @@
         android:label="pharm_live"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+          <!-- Add the following meta-data for Google Maps API key -->
+          <meta-data
+          android:name="com.google.android.geo.API_KEY"
+          android:value="AIzaSyBay6Nv53J-zanMHUf2Jt-bu63P3fgtr-k"/>
+          
         <activity
             android:name=".MainActivity"
             android:exported="true"

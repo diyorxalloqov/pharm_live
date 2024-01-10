@@ -60,10 +60,10 @@ class SecureStorageRepository {
 
   //////////  BOOLEAN
 
-  Future<bool> getBool(String key, {bool defValue = true}) async {
+  static Future<bool>? getBool(String key, {bool defValue = false}) async {
     try {
       String? stringValue = await _storage.read(key: key);
-      return stringValue?.toLowerCase() == 'true';
+      return stringValue?.toLowerCase() == 'true' ? true : defValue;
     } catch (e) {
       return defValue;
     }

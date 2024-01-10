@@ -1,6 +1,6 @@
 import 'package:pharm_live/modules/global/helpers/imports/app_imports.dart';
 
-showBottomSheetWidget(BuildContext context) {
+showRegisterBottomSheetWidget(BuildContext context) {
   showModalBottomSheet(
       isScrollControlled: true,
       context: context,
@@ -19,7 +19,7 @@ class RegisterBottomSheet extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const HighText(text: "Войти"),
+          MediumText(text: "Войти".tr()),
           SpaceHeight(height: 20.h),
           const Text("Имя*"),
           const SpaceHeight(),

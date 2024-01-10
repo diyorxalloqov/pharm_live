@@ -50,85 +50,88 @@ class _RegisterPageState extends State<OtpPage> {
                 image:
                     DecorationImage(image: AssetImage(AppImages.background))),
             child: SafeArea(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      IconButton(
-                          onPressed: () {},
-                          icon: const Icon(Icons.arrow_back_ios)),
-                      const AppIconName(color: Colors.black)
-                    ],
-                  ),
-                  Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+              child: BlocListener<RegisterBloc, RegisterState>(
+                bloc: widget.registerBloc,
+                listener: (context, state) {
+                  if (state.isSmsCorrect) {
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, "bottomNavbar", (route) => false);
+                  }
+                },
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
                       children: [
-                        const SpaceHeight(),
-                        const HighText(text: "Код подтверждения"),
-                        const SpaceHeight(),
-                        SmallText(
-                            text:
-                                "Пожалуйста, введите код, отправленный на номер ${widget.phone}"),
-                        SpaceHeight(height: 20.h),
-                        Form(
-                            key: _formKey,
-                            child: Pinput(
-                              androidSmsAutofillMethod:
-                                  AndroidSmsAutofillMethod.smsUserConsentApi,
-                              listenForMultipleSmsOnAndroid: true,
-                              defaultPinTheme: defaultPinTheme,
-                              separatorBuilder: (index) =>
-                                  const SizedBox(width: 20),
-                              hapticFeedbackType:
-                                  HapticFeedbackType.lightImpact,
-                              onChanged: (value) {
-                                debugPrint('onChanged: $value');
-                              },
-                              enabled: true,
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              length: 5,
-                              submittedPinTheme: defaultPinTheme.copyBorderWith(
-                                border: const Border(
-                                    bottom: BorderSide(color: Colors.green)),
-                              ),
-                              controller: _smsController,
-                              errorPinTheme: defaultPinTheme.copyBorderWith(
-                                border: const Border(
-                                    bottom: BorderSide(color: Colors.red)),
-                              ),
-                              autofillHints: const [AutofillHints.oneTimeCode],
-                              validator: (s) {
-                                bool isCorrect = s == _smsController.text;
-                                return isCorrect ? null : 'Pin is incorrect';
-                              },
-                              pinputAutovalidateMode:
-                                  PinputAutovalidateMode.onSubmit,
-                              showCursor: true,
-                              onCompleted: (pin) {
-                                if (_formKey.currentState!.validate()) {
-                                  widget.registerBloc.add(
-                                      RegisterEvent.checkSms(
-                                          onSucces: () {},
-                                          phone: widget.phone,
-                                          sms: _smsController.text));
-                                  widget.registerBloc.state.isSmsCorrect
-                                      ? Navigator.pushNamed(
-                                          context, 'bottomNavbar')
-                                      : const ScaffoldMessenger(
-                                          child: SnackBar(
-                                              content:
-                                                  Text("Pin is incorrect")));
-                                }
-                              },
-                            )),
+                        IconButton(
+                            onPressed: () {},
+                            icon: const Icon(Icons.arrow_back_ios)),
+                        const AppIconName(color: Colors.black)
                       ],
                     ),
-                  )
-                ],
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 20.w, vertical: 20.h),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SpaceHeight(),
+                          const HighText(text: "Код подтверждения"),
+                          const SpaceHeight(),
+                          SmallText(
+                              text:
+                                  "Пожалуйста, введите код, отправленный на номер ${widget.phone}"),
+                          SpaceHeight(height: 20.h),
+                          Form(
+                              key: _formKey,
+                              child: Pinput(
+                                androidSmsAutofillMethod:
+                                    AndroidSmsAutofillMethod.smsUserConsentApi,
+                                listenForMultipleSmsOnAndroid: true,
+                                defaultPinTheme: defaultPinTheme,
+                                separatorBuilder: (index) =>
+                                    const SizedBox(width: 20),
+                                hapticFeedbackType:
+                                    HapticFeedbackType.lightImpact,
+                                onChanged: (value) {
+                                  debugPrint('onChanged: $value');
+                                },
+                                enabled: true,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                length: 5,
+                                submittedPinTheme:
+                                    defaultPinTheme.copyBorderWith(
+                                  border: const Border(
+                                      bottom: BorderSide(color: Colors.green)),
+                                ),
+                                controller: _smsController,
+                                errorPinTheme: defaultPinTheme.copyBorderWith(
+                                  border: const Border(
+                                      bottom: BorderSide(color: Colors.red)),
+                                ),
+                                autofillHints: const [
+                                  AutofillHints.oneTimeCode
+                                ],
+                                validator: (s) {
+                                  bool isCorrect = s == _smsController.text;
+                                  return isCorrect ? null : 'Pin is incorrect';
+                                },
+                                pinputAutovalidateMode:
+                                    PinputAutovalidateMode.onSubmit,
+                                showCursor: true,
+                                onCompleted: (pin) async {
+                                  ActionStatus.isLoading;
+                                  widget.registerBloc.add(
+                                      RegisterEvent.checkSms(
+                                          phone: widget.phone, sms: pin));
+                                },
+                              )),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
           ),
@@ -155,17 +158,7 @@ class _RegisterPageState extends State<OtpPage> {
             onPressed: () {
               if (_formKey.currentState!.validate()) {
                 widget.registerBloc.add(RegisterEvent.checkSms(
-                    onSucces: () {},
-                    phone: widget.phone,
-                    sms: _smsController.text));
-                widget.registerBloc.state.isSmsCorrect
-                    ? Navigator.pushNamedAndRemoveUntil(
-                        context,
-                        'bottomNavbar',
-                        (route) => false,
-                      )
-                    : const ScaffoldMessenger(
-                        child: SnackBar(content: Text("Pin is incorrect")));
+                    phone: widget.phone, sms: _smsController.text));
               }
             },
             style: ElevatedButton.styleFrom(

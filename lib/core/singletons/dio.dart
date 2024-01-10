@@ -5,8 +5,13 @@ class DioSettings {
     baseUrl: AppUrls.baseUrl,
     connectTimeout: const Duration(seconds: 35),
     receiveTimeout: const Duration(seconds: 35),
-    contentType: 'Application/json',
-    validateStatus: (status) => status != null && status <= 500,
+    contentType: 'application/json',
+    validateStatus: (status) =>
+        status != null && status <= 500 && status >= 100,
+    // headers: {
+    //   'Content-Type': 'application/json',
+    //   'Authorization': "Bearer ${await accessToken}"
+    // },
   );
 
   BaseOptions get dioBaseOptions => _dioBaseOptions;
@@ -14,33 +19,40 @@ class DioSettings {
   Dio get dio {
     var dio1 = Dio(_dioBaseOptions)
       ..interceptors.add(InterceptorsWrapper(
-        onResponse: (response, handler) async {
-          print('interceptor OnResponse');
-          if (response.statusCode == 401) {
-            print('refresh Token');
-            var responseRefresh = await dio.post('url', data: {
-              "Authorization": "Bearer saasd"
-              // "Bearer ${StorageRepository.getString(StorageKeys.refreshToken)}"
+        onError: (DioException e, ErrorInterceptorHandler handler) async {
+          print('Interceptor OnError');
+          if (e.response?.statusCode == 401) {
+            print('Refresh Token');
+            var responseRefresh = await Dio().post(AppUrls.tokenRefresh, data: {
+              "token": await FlutterSecureStorage().read(key: Keys.refresh),
+              "type": "refresh",
             });
-
             if (responseRefresh.statusCode! >= 200 &&
                 responseRefresh.statusCode! < 300) {
-              handler.next(responseRefresh);
+              FlutterSecureStorage().write(
+                  key: Keys.access, value: responseRefresh.data['access']);
+              FlutterSecureStorage().write(
+                  key: Keys.refresh, value: responseRefresh.data['refresh']);
+              handler.next(e);
             } else {
-              handler.next(response);
+              // Handle refresh token failure
+              // You might want to throw an error or handle it accordingly
             }
           } else {
-            handler.next(response);
+            handler.next(e);
           }
         },
-        onRequest: (request, handler) {
-          print('interceptor OnRequest');
-          request.headers.addAll({});
-          handler.next(request);
+        onRequest: (RequestOptions options, RequestInterceptorHandler handler) {
+          print('Interceptor OnRequest');
+
+          options.headers.addAll({'Accept-Language': "uz"});
+          handler.next(options);
         },
-        onError: (request, errorHandler) async {
-          errorHandler.next(request);
-          print('interceptorOnError');
+        onResponse:
+            (Response response, ResponseInterceptorHandler handler) async {
+          print('Interceptor OnResponse');
+          // Modify response here if needed
+          handler.next(response);
         },
       ));
     return dio1;

@@ -7,6 +7,7 @@ class AppIconName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisSize: MainAxisSize.min,
       children: [
         SvgPicture.asset(AppIcons.appIcon, width: 30),
         const SpaceWidth(),
