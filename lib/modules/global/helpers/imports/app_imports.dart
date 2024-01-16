@@ -71,3 +71,8 @@ export 'package:pharm_live/modules/global/presentation/widgets/hexToString.dart'
 export 'package:flutter_secure_storage/flutter_secure_storage.dart';
 export 'package:pharm_live/core/singletons/keys.dart';
 export 'package:pharm_live/modules/profile/data/source/service/profile_service.dart';
+export 'package:pharm_live/modules/profile/domain/repository/profile_repository.dart';
+export 'package:pharm_live/modules/profile/data/repository/profile_repositoryImpl.dart';
+export 'package:pharm_live/modules/profile/presentation/ui/pages/history/oreder_details_page.dart';
+
+

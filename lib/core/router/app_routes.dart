@@ -15,7 +15,7 @@ class RouteList {
       case "otp":
         final args = settings.arguments as OtpPageArguments;
         return _navigate(BlocProvider(
-          create: (context) => RegisterBloc(RegisterUseCase(),SmsUseCase()),
+          create: (context) => RegisterBloc(RegisterUseCase(), SmsUseCase()),
           child: OtpPage(phone: args.phone, registerBloc: args.registerBloc),
         ));
       case "bottomNavbar":
@@ -30,6 +30,8 @@ class RouteList {
         return _navigate(const DeliveryPage());
       case "orderHistory":
         return _navigate(const OrderHistory());
+      case "orderDetail":
+        return _navigate(OrderDetail(item: settings.arguments as HistoryEnum));
     }
     return null;
   }

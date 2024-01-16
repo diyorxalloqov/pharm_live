@@ -21,6 +21,13 @@ class AppIcons {
   static const String time_orange = 'assets/icons/time_orange.svg';
   static const String tick = 'assets/icons/tick.svg';
   static const String truck_blue = 'assets/icons/truck_blue.svg';
+  static const String edit = 'assets/icons/edit.svg';
+  static const String logOut = 'assets/icons/logout.svg';
+  static const String warning = 'assets/icons/warning.svg';
+  static const String cancel = 'assets/icons/cancel.svg';
+
+
+
 
 
 

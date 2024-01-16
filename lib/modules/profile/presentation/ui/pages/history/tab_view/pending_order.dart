@@ -1,4 +1,3 @@
-
 import 'package:pharm_live/modules/global/helpers/imports/app_imports.dart';
 
 class PendingOrder extends StatelessWidget {
@@ -10,11 +9,13 @@ class PendingOrder extends StatelessWidget {
         itemCount: 10,
         padding: EdgeInsets.only(top: 30.h, bottom: 10.h),
         itemBuilder: (context, index) {
-          return const HistoryItem(
-              ordernum: '00012',
-              item: HistoryEnum.pendingOrder,
-              price: '25 000 UZS',
-              time: '01.02.2023/12:20');
+          return HistoryItem(
+            ordernum: '00012',
+            item: HistoryEnum.pendingOrder,
+            price: '25 000 UZS',
+            time: '01.02.2023/12:20',
+            onTap: () {},
+          );
         });
   }
 }

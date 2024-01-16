@@ -1,14 +1,41 @@
 import 'package:pharm_live/modules/global/helpers/imports/app_imports.dart';
+import 'package:pharm_live/modules/profile/presentation/profile/profile_bloc.dart';
 
-showRegisterBottomSheetWidget(BuildContext context) {
+showRegisterBottomSheetWidget(
+    BuildContext context, ProfileBloc profileBloc, bool isRegistered) {
   showModalBottomSheet(
       isScrollControlled: true,
       context: context,
-      builder: (context) => const RegisterBottomSheet());
+      builder: (context) => RegisterBottomSheet(
+            isRegistered: isRegistered,
+            profileBloc: profileBloc,
+          ));
 }
 
-class RegisterBottomSheet extends StatelessWidget {
-  const RegisterBottomSheet({super.key});
+class RegisterBottomSheet extends StatefulWidget {
+  final bool isRegistered;
+  final ProfileBloc profileBloc;
+
+  /// blocdan keladigan name lastname phone ni textediting ga berish kerak
+  const RegisterBottomSheet(
+      {super.key, required this.profileBloc, required this.isRegistered});
+
+  @override
+  State<RegisterBottomSheet> createState() => _RegisterBottomSheetState();
+}
+
+class _RegisterBottomSheetState extends State<RegisterBottomSheet> {
+  late TextEditingController _nameController;
+  late TextEditingController _lastNameController;
+  late TextEditingController _phoneController;
+
+  @override
+  void initState() {
+    _lastNameController = TextEditingController();
+    _nameController = TextEditingController();
+    _phoneController = TextEditingController();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +51,7 @@ class RegisterBottomSheet extends StatelessWidget {
           const Text("Имя*"),
           const SpaceHeight(),
           TextFormField(
+            controller: _nameController,
             decoration: InputDecoration(
                 hintText: 'Введите ваше имя',
                 hintStyle: TextStyle(color: greyColor),
@@ -35,6 +63,7 @@ class RegisterBottomSheet extends StatelessWidget {
           const Text("Фамилия*"),
           const SpaceHeight(),
           TextFormField(
+            controller: _lastNameController,
             decoration: InputDecoration(
                 hintText: 'Введите ваше фамилия',
                 hintStyle: TextStyle(color: greyColor),
@@ -46,6 +75,7 @@ class RegisterBottomSheet extends StatelessWidget {
           const Text("Номер телефона*"),
           const SpaceHeight(),
           TextFormField(
+            controller: _phoneController,
             keyboardType: TextInputType.phone,
             // controller: _phoneController,
             inputFormatters: [
@@ -71,7 +101,15 @@ class RegisterBottomSheet extends StatelessWidget {
           ),
           SpaceHeight(height: 16.h),
           ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                widget.isRegistered
+                    ? widget.profileBloc.add(ProfileEvent.profileUpdate(
+                        phone: _phoneController.text,
+                        firstName: _nameController.text,
+                        lastName: _lastNameController.text))
+                    : null;
+                Navigator.maybePop(context);
+              },
               style: ElevatedButton.styleFrom(
                   backgroundColor: primaryColor,
                   fixedSize: Size(context.width, context.height * 0.07)),

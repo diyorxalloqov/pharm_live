@@ -47,8 +47,9 @@ class _RegisterPageState extends State<OtpPage> {
             padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
             height: context.height * 0.5.h,
             decoration: const BoxDecoration(
-                image:
-                    DecorationImage(image: AssetImage(AppImages.background))),
+                image: DecorationImage(
+                    image: AssetImage(AppImages.background),
+                    fit: BoxFit.cover)),
             child: SafeArea(
               child: BlocListener<RegisterBloc, RegisterState>(
                 bloc: widget.registerBloc,

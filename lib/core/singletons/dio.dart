@@ -7,7 +7,7 @@ class DioSettings {
     receiveTimeout: const Duration(seconds: 35),
     contentType: 'application/json',
     validateStatus: (status) =>
-        status != null && status <= 500 && status >= 100,
+        status != null && status >= 100 && status <= 599,
     // headers: {
     //   'Content-Type': 'application/json',
     //   'Authorization': "Bearer ${await accessToken}"
@@ -48,12 +48,12 @@ class DioSettings {
           options.headers.addAll({'Accept-Language': "uz"});
           handler.next(options);
         },
-        onResponse:
-            (Response response, ResponseInterceptorHandler handler) async {
-          print('Interceptor OnResponse');
-          // Modify response here if needed
-          handler.next(response);
-        },
+        // onResponse:
+        //     (Response response, ResponseInterceptorHandler handler) async {
+        //   print('Interceptor OnResponse');
+        //   // Modify response here if needed
+        //   handler.next(response);
+        // },
       ));
     return dio1;
   }

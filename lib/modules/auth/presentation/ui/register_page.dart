@@ -31,8 +31,9 @@ class _RegisterPageState extends State<RegisterPage> {
               padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
               height: context.height * 0.55.h,
               decoration: const BoxDecoration(
-                  image:
-                      DecorationImage(image: AssetImage(AppImages.background))),
+                  image: DecorationImage(
+                      image: AssetImage(AppImages.background),
+                      fit: BoxFit.cover)),
               child: SafeArea(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

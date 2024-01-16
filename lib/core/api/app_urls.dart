@@ -13,4 +13,13 @@ class AppUrls {
       '$baseUrl/api/v1/account/user_token_check'; // post
   static const String deleteProfile =
       '$baseUrl/api/v1/account/profile_delete'; // delete
+  static const String profileCashback =
+      '$baseUrl/api/v1/account/profile_cashback'; // get
+  static const String userOrders = '$baseUrl/api/v1/account/user_orders'; // get
+  static const String buyDrugDetail =
+      '$baseUrl/api/v1/account/buy_drug_detail'; // get
+  static const String buyDrugDetailDrugs =
+      '$baseUrl/api/v1/account/buy_drug_detail_drugs'; // get
+  static const String orderCancel =
+      '$baseUrl/api/v1/account/order_cancel'; // post
 }
